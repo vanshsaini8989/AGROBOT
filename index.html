@@ -383,4 +383,174 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
+  
+<!-- AGROBOT PROTOTYPE GALLERY -->
+<style>
+  .agro-media {
+    padding: 80px 6%;
+    background: #07130f;
+    color: #f1f7ef;
+  }
+
+  .agro-media .media-heading {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  .agro-media .media-heading h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 12px;
+  }
+
+  .agro-media .media-heading p {
+    color: #a6b8aa;
+  }
+
+  .agro-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1150px;
+    margin: 0 auto 65px;
+  }
+
+  .agro-gallery figure {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid rgba(197, 232, 198, .15);
+    border-radius: 16px;
+    background: #10251a;
+  }
+
+  .agro-gallery img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform .35s ease;
+  }
+
+  .agro-gallery figure:hover img {
+    transform: scale(1.05);
+  }
+
+  .agro-gallery figcaption {
+    padding: 14px;
+    color: #c8f6a6;
+    font-weight: 600;
+  }
+
+  .agro-video-wrap {
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(197, 232, 198, .2);
+    background: #10251a;
+  }
+
+  .agro-video-wrap video {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    background: #000;
+  }
+
+  .agro-video-caption {
+    padding: 18px;
+    color: #a6b8aa;
+    text-align: center;
+  }
+
+  @media (max-width: 750px) {
+    .agro-gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .agro-gallery img {
+      height: 190px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .agro-gallery {
+      grid-template-columns: 1fr;
+    }
+    .agro-gallery img {
+      height: 230px;
+    }
+  }
+</style>
+
+<section class="agro-media" id="prototype-gallery">
+
+  <div class="media-heading">
+    <h2>AGROBoT Prototype Gallery</h2>
+    <p>Real photographs of our working agricultural vehicle prototype.</p>
+  </div>
+
+  <div class="agro-gallery">
+
+    <figure>
+      <img src="agrobot-front.jpg"
+           alt="AGROBoT front view"
+           loading="lazy">
+      <figcaption>Prototype – Front View</figcaption>
+    </figure>
+
+    <figure>
+      <img src="agrobot-side.jpg"
+           alt="AGROBoT side view"
+           loading="lazy">
+      <figcaption>Prototype – Side View</figcaption>
+    </figure>
+
+    <figure>
+      <img src="agrobot-camera.jpg"
+           alt="AGROBoT mobile control interface"
+           loading="lazy">
+      <figcaption>Mobile Control System</figcaption>
+    </figure>
+
+    <figure>
+      <img src="agrobot-spraying.jpg"
+           alt="AGROBoT liquid spraying mechanism"
+           loading="lazy">
+      <figcaption>Liquid Spraying Mechanism</figcaption>
+    </figure>
+
+    <figure>
+      <img src="agrobot-working.jpg"
+           alt="AGROBoT working prototype"
+           loading="lazy">
+      <figcaption>Working Prototype</figcaption>
+    </figure>
+
+    <figure>
+      <img src="agrobot-prototype.jpg"
+           alt="AGROBoT prototype photograph"
+           loading="lazy">
+      <figcaption>AGROBoT – Prototype</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="media-heading">
+    <h2>Working Demonstration</h2>
+    <p>Watch the AGROBoT prototype demonstration.</p>
+  </div>
+
+  <div class="agro-video-wrap">
+    <video controls playsinline preload="metadata">
+      <source src="agrobot-demo.mp4" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+
+    <div class="agro-video-caption">
+      AGROBoT – Smart Agricultural Vehicle Demonstration
+    </div>
+  </div>
+
+</section>
+<!-- END AGROBOT PROTOTYPE GALLERY -->
+
 </html>
