@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07130f">
+  <meta name="description" content="AGROBoT is an accessibility-focused smart agricultural vehicle concept for farmers with limited mobility.">
+  <title>AGROBoT | Smart Agriculture, Made Accessible</title>
+  <style>
+    :root {
+      --bg: #07130f;
+      --bg-soft: #0b1b14;
+      --panel: rgba(17, 39, 28, .78);
+      --panel-solid: #10251a;
+      --green: #a5ef73;
+      --green-2: #5dc887;
+      --mint: #c8f6a6;
+      --text: #f1f7ef;
+      --muted: #a6b8aa;
+      --line: rgba(197, 232, 198, .13);
+      --amber: #f1c77a;
+      --shadow: 0 24px 80px rgba(0,0,0,.28);
+      --radius: 24px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(ellipse at 80% 0%, rgba(77, 168, 103, .15), transparent 34rem),
+        radial-gradient(ellipse at 0% 35%, rgba(73, 137, 89, .10), transparent 32rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .nav-wrap { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px); background: rgba(7,19,15,.78); border-bottom: 1px solid var(--line); }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.04em; font-size: 1.2rem; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; color: #07130f; background: linear-gradient(135deg, var(--green), #54c78d); box-shadow: 0 8px 26px rgba(128,226,125,.2); }
+    .brand small { display: block; color: var(--muted); font-size: .62rem; letter-spacing: .16em; font-weight: 700; margin-top: -4px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: #c1d0c4; font-size: .88rem; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta, .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 18px; border-radius: 999px; border: 1px solid transparent; background: var(--green); color: #0a1a10; font-weight: 800; transition: transform .2s, box-shadow .2s, background .2s; cursor: pointer; }
+    .nav-cta:hover, .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(165,239,115,.2); }
+    .btn.secondary { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn.secondary:hover { border-color: rgba(165,239,115,.55); background: rgba(165,239,115,.06); }
+    .menu-btn { display: none; background: transparent; border: 1px solid var(--line); color: var(--text); border-radius: 12px; padding: 8px 11px; }
+    .hero { position: relative; padding: 94px 0 78px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 50px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(165,239,115,.25); color: var(--mint); background: rgba(165,239,115,.07); border-radius: 999px; padding: 7px 12px; text-transform: uppercase; letter-spacing: .13em; font-size: .68rem; font-weight: 800; }
+    .eyebrow:before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+    h1 { font-size: clamp(3.1rem, 7vw, 6.2rem); line-height: .98; letter-spacing: -.075em; margin: 24px 0 22px; max-width: 760px; }
+    h1 span { color: var(--green); }
+    .hero-copy { color: #b7c8ba; font-size: 1.08rem; max-width: 600px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-note { margin-top: 24px; color: #819789; font-size: .8rem; }
+    .visual-shell { min-height: 470px; position: relative; border: 1px solid var(--line); border-radius: 34px; background: linear-gradient(145deg, rgba(31,74,47,.58), rgba(9,25,17,.8)); overflow: hidden; box-shadow: var(--shadow); isolation: isolate; }
+    .visual-shell:before, .visual-shell:after { content: ""; position: absolute; border: 1px solid rgba(165,239,115,.16); border-radius: 50%; width: 390px; height: 390px; left: 50%; top: 48%; transform: translate(-50%,-50%); z-index: -1; }
+    .visual-shell:after { width: 500px; height: 500px; border-style: dashed; opacity: .6; animation: spin 45s linear infinite; }
+    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .orbit-tag { position: absolute; border: 1px solid var(--line); border-radius: 14px; padding: 10px 13px; background: rgba(6,19,12,.78); backdrop-filter: blur(10px); font-size: .76rem; color: #d7e6d7; box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+    .orbit-tag b { color: var(--green); display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+    .tag-one { top: 40px; left: 26px; } .tag-two { right: 22px; top: 110px; } .tag-three { bottom: 34px; left: 24px; }
+    .robot-scene { position: absolute; inset: 0; display: grid; place-items: center; }
+    .robot { width: min(82%, 440px); height: 250px; position: relative; transform: perspective(700px) rotateX(10deg) rotateZ(-8deg); filter: drop-shadow(0 34px 28px rgba(0,0,0,.4)); }
+    .robot-body { position: absolute; left: 13%; right: 13%; top: 27%; height: 48%; background: linear-gradient(145deg,#b6e58b,#4caa6d 55%,#226044); border: 2px solid rgba(222,255,198,.7); border-radius: 26px 30px 24px 24px; box-shadow: inset 0 8px 20px rgba(255,255,255,.25), inset 0 -15px 20px rgba(0,0,0,.22); }
+    .robot-top { position: absolute; left: 29%; right: 29%; top: 13%; height: 27%; background: linear-gradient(140deg,#d7f6b1,#7fc77e); border: 2px solid rgba(238,255,216,.75); border-radius: 17px 17px 8px 8px; transform: skewY(-7deg); }
+    .camera { position: absolute; width: 42px; height: 25px; left: 45%; top: 7%; background: #10241b; border: 3px solid #b7e88d; border-radius: 9px; }
+    .camera:after { content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:#77d7ef; top:5px; left:13px; box-shadow:0 0 12px #77d7ef; }
+    .wheel { position: absolute; width: 65px; height: 105px; top: 42%; background: repeating-linear-gradient(0deg,#17241d 0 8px,#344b3a 8px 13px); border: 5px solid #516d54; border-radius: 22px; box-shadow: inset 0 0 0 5px #18271e; }
+    .wheel.left { left: 2%; } .wheel.right { right: 2%; }
+    .wheel.back { top: 47%; transform: scale(.82); opacity: .9; }
+    .spray-tank { position:absolute; width:75px; height:88px; right:25%; top:1%; background:linear-gradient(90deg,#dce8d1,#7eaa7d); border:3px solid #d7efc3; border-radius:17px 17px 10px 10px; }
+    .spray-tank:after { content:""; position:absolute; width:13px; height:17px; top:-12px; left:28px; border-radius:5px; background:#bce78f; }
+    .spray-line { position:absolute; width:3px; height:55px; background:#d2e5bd; right:17%; top:57%; transform:rotate(-35deg); }
+    .spray-line:after { content:""; position:absolute; bottom:-9px; left:-7px; width:16px; height:16px; border-radius:50%; background:rgba(137,224,150,.35); box-shadow:0 0 18px rgba(137,224,150,.8); }
+    .visual-caption { position:absolute; bottom:17px; right:20px; color:#8fa895; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+    section { padding: 82px 0; }
+    .section-head { max-width: 720px; margin-bottom: 34px; }
+    .kicker { color: var(--green); text-transform: uppercase; font-weight: 850; font-size: .7rem; letter-spacing: .16em; }
+    h2 { font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -.055em; line-height: 1.08; margin: 12px 0 14px; }
+    .section-head p, .muted { color: var(--muted); }
+    .problem-grid { display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+    .problem-card, .feature-card, .info-card, .step-card { border:1px solid var(--line); border-radius:var(--radius); background:linear-gradient(145deg,rgba(18,43,29,.82),rgba(10,27,19,.75)); padding:26px; }
+    .problem-card .symbol { font-size:1.8rem; }
+    .problem-card h3, .feature-card h3, .info-card h3 { margin:12px 0 8px; font-size:1.15rem; }
+    .problem-card p, .feature-card p, .info-card p { margin:0; color:var(--muted); font-size:.93rem; }
+    .solution-band { margin-top:18px; padding:25px 28px; border:1px solid rgba(165,239,115,.25); background:linear-gradient(100deg,rgba(165,239,115,.12),rgba(93,200,135,.04)); border-radius:var(--radius); display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .solution-band strong { font-size:1.1rem; }
+    .solution-band p { margin:4px 0 0; color:var(--muted); }
+    .feature-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .feature-card { position:relative; overflow:hidden; min-height:220px; }
+    .feature-card:after { content:attr(data-num); position:absolute; right:18px; top:4px; font-size:5.5rem; font-weight:900; letter-spacing:-.1em; color:rgba(165,239,115,.07); }
+    .feature-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .feature-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; background:rgba(165,239,115,.1); font-size:1.35rem; }
+    .status { font-size:.67rem; font-weight:850; text-transform:uppercase; letter-spacing:.09em; padding:6px 9px; border-radius:999px; }
+    .status.demo { color:#c9f6a7; background:rgba(165,239,115,.12); border:1px solid rgba(165,239,115,.25); }
+    .status.future { color:#f1d69e; background:rgba(241,199,122,.09); border:1px solid rgba(241,199,122,.22); }
+    .feature-card h3 { margin-top:18px; }
+    .feature-foot { margin-top:15px; color:#8da795; font-size:.78rem; }
+    .prototype-layout { display:grid; grid-template-columns:.85fr 1.15fr; gap:30px; align-items:start; }
+    .prototype-list { display:grid; gap:12px; }
+    .prototype-item { display:flex; gap:14px; padding:16px; border:1px solid var(--line); border-radius:17px; background:rgba(15,36,25,.7); }
+    .prototype-item .num { flex:0 0 32px; width:32px; height:32px; display:grid; place-items:center; border-radius:10px; background:rgba(165,239,115,.12); color:var(--green); font-weight:900; }
+    .prototype-item b { display:block; margin-bottom:2px; }
+    .prototype-item span { color:var(--muted); font-size:.85rem; }
+    .media-placeholder { min-height:390px; border:1px dashed rgba(165,239,115,.35); border-radius:var(--radius); background:linear-gradient(145deg,rgba(165,239,115,.08),rgba(13,33,22,.65)); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px; color:var(--muted); }
+    .media-placeholder .big { font-size:3rem; margin-bottom:12px; }
+    .media-placeholder strong { color:var(--text); font-size:1.1rem; }
+    .media-placeholder code { display:inline-block; margin-top:12px; color:var(--green); background:rgba(0,0,0,.25); padding:6px 9px; border-radius:8px; font-size:.78rem; }
+    .model-panel { border:1px solid var(--line); border-radius:30px; background:linear-gradient(120deg,rgba(20,52,33,.82),rgba(8,25,17,.86)); padding:34px; display:grid; grid-template-columns:1fr .9fr; gap:25px; align-items:center; overflow:hidden; }
+    .model-art { min-height:250px; display:grid; place-items:center; position:relative; }
+    .model-art .ring { position:absolute; width:245px; height:245px; border:1px dashed rgba(165,239,115,.25); border-radius:50%; }
+    .model-art .mini-robot { position:relative; width:220px; height:110px; background:linear-gradient(135deg,#b9e98e,#39895b); border:2px solid #d9f7b7; border-radius:24px; transform:rotate(-12deg); box-shadow:0 30px 40px rgba(0,0,0,.35); }
+    .mini-robot:before,.mini-robot:after { content:""; position:absolute; width:45px; height:72px; top:22px; background:#1a2b20; border:5px solid #5c7858; border-radius:17px; }
+    .mini-robot:before { left:-20px; } .mini-robot:after { right:-20px; }
+    .mini-roof { position:absolute; width:90px; height:44px; left:65px; top:-32px; background:#c9e5aa; border:2px solid #efffd9; border-radius:13px; }
+    .model-copy p { color:var(--muted); }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .pill { border:1px solid var(--line); border-radius:999px; padding:7px 10px; color:#c8d9ca; font-size:.76rem; }
+    .roadmap { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .step-card { padding:22px; }
+    .step-card .step { color:var(--green); font-weight:900; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+    .step-card h3 { margin:9px 0 7px; }
+    .step-card p { margin:0; color:var(--muted); font-size:.88rem; }
+    .impact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .impact { padding:23px; border-left:2px solid var(--green); background:rgba(165,239,115,.045); border-radius:0 16px 16px 0; }
+    .impact b { display:block; font-size:1.05rem; margin-bottom:5px; }
+    .impact span { color:var(--muted); font-size:.86rem; }
+    .closing { text-align:center; padding:58px 30px; border:1px solid rgba(165,239,115,.22); border-radius:32px; background:radial-gradient(circle at 50% 0%,rgba(165,239,115,.13),transparent 60%),rgba(13,34,22,.7); }
+    .closing h2 { max-width:760px; margin:12px auto; }
+    .closing p { max-width:650px; margin:0 auto 24px; color:var(--muted); }
+    footer { padding:34px 0 44px; border-top:1px solid var(--line); color:#829688; font-size:.82rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .disclaimer { color:#8d9e90; font-size:.76rem; margin-top:14px; max-width:800px; }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion: reduce) { *,*:before,*:after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } .reveal {opacity:1;transform:none;} }
+    @media (max-width: 850px) {
+      .nav-links { display:none; position:absolute; top:76px; left:0; right:0; padding:20px; flex-direction:column; align-items:flex-start; background:#0a1a12; border-bottom:1px solid var(--line); }
+      .nav-links.open { display:flex; } .menu-btn { display:block; } .nav-cta { display:none; }
+      .hero-grid,.prototype-layout,.model-panel { grid-template-columns:1fr; }
+      .hero { padding-top:62px; } .visual-shell { min-height:400px; }
+      .roadmap { grid-template-columns:1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { width:min(var(--max),calc(100% - 28px)); }
+      section { padding:62px 0; }
+      .hero { padding:54px 0 55px; }
+      .problem-grid,.feature-grid,.impact-grid { grid-template-columns:1fr; }
+      .solution-band { align-items:flex-start; flex-direction:column; }
+      .visual-shell { min-height:340px; }
+      .robot { transform:perspective(700px) rotateX(10deg) rotateZ(-8deg) scale(.78); }
+      .orbit-tag { font-size:.65rem; padding:8px 9px; }
+      .tag-two { top:90px; } .model-panel { padding:24px; }
+      .footer-inner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav class="container">
+      <a class="brand" href="#home" aria-label="AGROBoT home">
+        <span class="brand-mark">✳</span>
+        <span>AGROBoT<small>SMART AGRICULTURE</small></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#problem">The Problem</a>
+        <a href="#features">Features</a>
+        <a href="#prototype">Prototype</a>
+        <a href="#design">3D Design</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+      <a class="nav-cta" href="#project">Explore Project <span>↗</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </nav>
+  </div>
+
+  <main>
+    <header class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Accessibility-first agricultural innovation</div>
+          <h1>Farming tech.<br><span>Without limits.</span></h1>
+          <p class="hero-copy"><strong>AGROBoT</strong> is a smart agricultural vehicle concept designed to help elderly farmers and farmers with limited mobility manage selected field activities through remote operation and monitoring.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#features">Discover the features <span>↓</span></a>
+            <a class="btn secondary" href="#prototype">See the prototype</a>
+          </div>
+          <p class="hero-note">A student innovation project by Vansh Saini · Individual Innovator</p>
+        </div>
+        <div class="visual-shell reveal" aria-label="Illustration of an agricultural robot vehicle">
+          <div class="orbit-tag tag-one"><b>Remote control</b>Mobile operation</div>
+          <div class="orbit-tag tag-two"><b>Live monitoring</b>Camera + sensors</div>
+          <div class="orbit-tag tag-three"><b>Modular concept</b>Multiple farm tasks</div>
+          <div class="robot-scene">
+            <div class="robot">
+              <div class="wheel left"></div><div class="wheel right"></div>
+              <div class="robot-body"></div><div class="robot-top"></div>
+              <div class="camera"></div><div class="spray-tank"></div><div class="spray-line"></div>
+            </div>
+          </div>
+          <div class="visual-caption">Concept illustration · not the physical prototype</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="project">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">01 / The idea</div>
+          <h2>Technology that puts the farmer first.</h2>
+          <p>AGROBoT starts with a simple question: how can we make selected agricultural tasks more manageable for people who cannot easily move around a field or perform physically demanding work?</p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card reveal">
+            <div class="symbol">🌾</div>
+            <h3>A physically demanding job</h3>
+            <p>Soil preparation, planting, spraying and harvesting can require considerable physical effort and movement across the field.</p>
+          </article>
+          <article class="problem-card reveal">
+            <div class="symbol">♿</div>
+            <h3>Access is not equal</h3>
+            <p>Elderly farmers and people with disabilities or limited mobility may find conventional field activities difficult to perform independently.</p>
+          </article>
+        </div>
+        <div class="solution-band reveal">
+          <div><strong>Our approach: remote operation + monitoring + modular attachments</strong><p>Support the farmer's supervision and control while progressively developing more agricultural functions.</p></div>
+          <span class="eyebrow">Accessibility-led design</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">02 / Four agricultural features</div>
+          <h2>One platform. Four farming functions.</h2>
+          <p>AGROBoT is planned as a modular vehicle that can support different stages of agricultural work. The status labels below distinguish what has been demonstrated from what is planned.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal" data-num="01">
+            <div class="feature-top"><span class="feature-icon">💧</span><span class="status demo">Demonstrated</span></div>
+            <h3>Spraying Mechanism</h3>
+            <p>A tank, pump and nozzle arrangement designed to spray liquid fertilizers or pesticides over crops, helping reduce the need for manual spraying.</p>
+            <div class="feature-foot">Current prototype: liquid spraying mechanism demonstrated.</div>
+          </article>
+          <article class="feature-card reveal" data-num="02">
+            <div class="feature-top"><span class="feature-icon">🌱</span><span class="status future">Future development</span></div>
+            <h3>Automatic Seed Planting</h3>
+            <p>A proposed seed-planting attachment intended to place seeds at a selected spacing and depth for a more systematic planting process.</p>
+            <div class="feature-foot">Planned module · not yet implemented in the current prototype.</div>
+          </article>
+          <article class="feature-card reveal" data-num="03">
+            <div class="feature-top"><span class="feature-icon">🚜</span><span class="status future">Future development</span></div>
+            <h3>Soil Preparation</h3>
+            <p>A proposed mini-tiller attachment intended to loosen and prepare the soil before planting.</p>
+            <div class="feature-foot">Planned module · not yet implemented in the current prototype.</div>
+          </article>
+          <article class="feature-card reveal" data-num="04">
+            <div class="feature-top"><span class="feature-icon">🌾</span><span class="status future">Future development</span></div>
+            <h3>Smart Harvesting</h3>
+            <p>A proposed crop-maturity sensing and harvesting-assistance mechanism to help identify mature crops and support the harvesting process.</p>
+            <div class="feature-foot">Advanced concept · not yet implemented in the current prototype.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prototype">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">03 / Current prototype</div>
+          <h2>Built, tested and demonstrated step by step.</h2>
+          <p>The current prototype focuses on proving the basic remote-operation and monitoring concept. It is not yet a fully autonomous agricultural vehicle.</p>
+        </div>
+        <div class="prototype-layout">
+          <div class="prototype-list">
+            <div class="prototype-item reveal"><span class="num">01</span><div><b>Mobile phone control</b><span>Controls the movement of the vehicle remotely.</span></div></div>
+            <div class="prototype-item reveal"><span class="num">02</span><div><b>Live camera feed</b><span>Streams the vehicle's surroundings to a laptop for monitoring.</span></div></div>
+            <div class="prototype-item reveal"><span class="num">03</span><div><b>Ultrasonic obstacle detection</b><span>Detects obstacles in front of the vehicle.</span></div></div>
+            <div class="prototype-item reveal"><span class="num">04</span><div><b>Liquid spraying mechanism</b><span>Demonstrates a basic agricultural spraying function.</span></div></div>
+            <div class="prototype-item reveal"><span class="num">05</span><div><b>Rechargeable battery operation</b><span>Provides electrical power to the current prototype.</span></div></div>
+          </div>
+          <div class="media-placeholder reveal">
+            <div class="big">📷</div>
+            <strong>Add your real prototype photo or demo video here</strong>
+            <p>Upload your media to the GitHub repository and replace this placeholder with an image or video embed. Use your actual prototype evidence for the competition.</p>
+            <code>assets/prototype.jpg</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="design">
+      <div class="container">
+        <div class="model-panel reveal">
+          <div class="model-art" aria-hidden="true"><div class="ring"></div><div class="mini-robot"><div class="mini-roof"></div></div></div>
+          <div class="model-copy">
+            <div class="kicker">04 / Proposed 3D design</div>
+            <h2>Designed to evolve with the task.</h2>
+            <p>The Blender model represents a proposed future form of AGROBoT, with space for a camera, spraying tank and interchangeable agricultural attachments. It is a concept design, not the current physical prototype.</p>
+            <div class="pill-row"><span class="pill">Modular attachments</span><span class="pill">Remote monitoring</span><span class="pill">Compact concept</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">05 / Development roadmap</div>
+          <h2>Build. Validate. Improve.</h2>
+          <p>The next phase is focused on making the prototype more reliable and evaluating it in real agricultural conditions before expanding its capabilities.</p>
+        </div>
+        <div class="roadmap">
+          <article class="step-card reveal"><div class="step">Phase 01 · Current</div><h3>Core prototype</h3><p>Demonstrate remote movement, live camera monitoring, ultrasonic obstacle detection and liquid spraying.</p></article>
+          <article class="step-card reveal"><div class="step">Phase 02 · Next</div><h3>Field validation</h3><p>Test stability, battery performance, reliability and usability on suitable field surfaces; collect user feedback.</p></article>
+          <article class="step-card reveal"><div class="step">Phase 03 · Future</div><h3>Modular expansion</h3><p>Explore seed planting, soil preparation, smart harvesting and other advanced assistance features.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">06 / Intended impact</div>
+          <h2>More access. More independence.</h2>
+          <p>These are the intended benefits of the project and will need to be assessed through field trials and feedback from potential users.</p>
+        </div>
+        <div class="impact-grid">
+          <div class="impact reveal"><b>Inclusive agriculture</b><span>Support participation by farmers with limited mobility.</span></div>
+          <div class="impact reveal"><b>Remote supervision</b><span>Help reduce the need for continuous physical movement during selected tasks.</span></div>
+          <div class="impact reveal"><b>Flexible platform</b><span>Explore multiple agricultural attachments on one vehicle platform.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container">
+        <div class="closing reveal">
+          <div class="kicker">An innovation by Vansh Saini</div>
+          <h2>Physical limitations should not limit a farmer's contribution.</h2>
+          <p>AGROBoT is an effort to connect technology with the accessibility needs of farmers — through remote operation, monitoring and a modular agricultural design.</p>
+          <a class="btn" href="#home">Back to top ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner"><span>© <span id="year"></span> AGROBoT · Student innovation project</span><span>Designed for accessible agriculture 🌿</span></div>
+      <p class="disclaimer">Project status note: The website describes the current prototype and proposed future development separately. Future modules and expected benefits are concepts, not claims of completed implementation or measured results.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
